@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="1" author="mironov">
+    <sql>CREATE SCHEMA utmn;</sql>
+  </changeSet>
+
+  <changeSet id="2" author="mironov">
+    <createTable schemaName="utmn" tableName="student"
+      remarks="Таблица для хранения информации о студентах">
+      <column name="id" type="bigserial" remarks="ID">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="fio" type="varchar(128)" remarks="ФИО студента">
+        <constraints nullable="false" />
+      </column>
+      <column name="passport" type="varchar(20)" remarks="Серия и номер паспорта студента">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>
