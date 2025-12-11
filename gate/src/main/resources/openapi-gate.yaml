@@ -22,14 +22,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StudentGateCreateRequest'
+              $ref: "#/components/schemas/StudentGateCreateRequest"
       responses:
-        '201':
+        "201":
           description: Студент создан (ответ от DATA SERVICE)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StudentGateResponse'
+                $ref: "#/components/schemas/StudentGateResponse"
+
+  /api/students/{id}:
+    get:
+      summary: Проксировать получение студента из внутреннего сервиса
+      description: Принимает запрос от клиента и перенаправляет его в DATA SERVICE.
+      operationId: getStudent
+      tags:
+        - studentGate
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор студента
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Студент найден (ответ от DATA SERVICE)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudentGateResponse"
+        "404":
+          description: Студент не найден
 
 components:
   schemas:

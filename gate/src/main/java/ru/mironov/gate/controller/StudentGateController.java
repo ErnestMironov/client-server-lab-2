@@ -31,4 +31,20 @@ public class StudentGateController implements StudentGateApi {
 
         return ResponseEntity.status(201).body(gateResponse);
     }
+
+    @Override
+    public ResponseEntity<StudentGateResponse> getStudent(Long id) {
+        try {
+            StudentDataResponse dataResponse = studentsFeignClient.getStudentDataByIdFromData(id);
+
+            StudentGateResponse gateResponse = new StudentGateResponse();
+            gateResponse.setId(dataResponse.getId());
+            gateResponse.setFullName(dataResponse.getFullName());
+            gateResponse.setPassport(dataResponse.getPassport());
+
+            return ResponseEntity.status(200).body(gateResponse);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
